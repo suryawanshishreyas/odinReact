@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Details</title>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif; margin: 2em;}
+            .summary-section {margin-bottom: 1.5em;}
+            h2{margin-bottom: 0.5em;}
+            .info {margin-left: 1em;}
+        </style>
+    </head>
+    <body>
+        <h1>Summary of your Information</h1>
+        <div id="summary"></div>
+        <script>
+            function renderSummary(){
+                const general = JSON.parse(localStorage.getItem('generalInfo') || '{}');
+                const education = JSON.parse(localStorage.getItem('educationInfo') || '{}');
+                const experience = JSON.parse(localStorage.getItem('experienceInfo') || '{}');
+
+                document.getElementById('summary').innerHTML = `
+                    <div class='summary-section'>
+                        <h2>General Information</h2>
+                        <div class='info'> Name: ${general.name || ''} </div>
+                        <div class='info'> Email: ${general.email || ''} </div>
+                        <div class='info'> Phone: ${general.phone || ''} </div>
+                    </div>
+                    <div class='summary-section'>
+                        <h2>Educatin</h2>
+                        <div class='info'> School: ${education.schoolName || ''} </div>
+                        <div class='info'> Title of Study: ${education.studyTitle || ''} </div>
+                        <div class='info'> Date of Study ${education.dateStudy || ''} </div>
+                    </div>
+                    <div class='summary-section'>
+                        <h2>Experience</h2>
+                        <div class='info'> Company Name: ${experience.companyName || ''} </div>
+                        <div class='info'> Position: ${experience.positionTitle || ''} </div>
+                        <div class='info'> Joining Date: ${experience.startDate.substring(0,10) || ''} </div>
+                        <div class='info'> Leaving Date: ${experience.endDate.substring(0,10) || ''} </div>
+                    </div>
+            `}
+            renderSummary();
+            const handleClick =() =>{
+                window.location.href='index.html';
+            }
+        </script>
+        <div class="summary-section">
+            <button type="button" onclick={handleClick}>Go back</button>
+        </div>
+    </body>
+</html>
